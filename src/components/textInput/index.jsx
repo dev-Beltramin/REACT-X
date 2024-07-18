@@ -1,18 +1,15 @@
 /* eslint-disable react/prop-types */
-import { useState, useRef } from "react";
+import { useState } from "react";
 import styles from "./textInput.module.scss";
 
 export const TextInput = ({ placeHolder, maxLength }) => {
   const [caracter, setCaracter] = useState("");
-  const [input, setInput] = useState("");
-  let InputValue = useRef();
+  const [input, setInput] = useState([""]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const coment = InputValue.current.value;
-
-    setInput(coment);
+    setInput([...input, caracter]);
   };
 
   return (
@@ -25,7 +22,6 @@ export const TextInput = ({ placeHolder, maxLength }) => {
             <textarea
               placeholder={placeHolder}
               maxLength={maxLength}
-              ref={InputValue}
               value={caracter}
               onChange={(e) => setCaracter(e.target.value)}
             />
@@ -34,8 +30,8 @@ export const TextInput = ({ placeHolder, maxLength }) => {
             {" "}
             {caracter.length}/ {maxLength}
           </span>
-          <div>
-            <button>Twwitar</button>
+          <div className={styles.button}>
+            <button>Twittar</button>
           </div>
         </form>
       </section>
@@ -43,7 +39,11 @@ export const TextInput = ({ placeHolder, maxLength }) => {
       <section className={styles.coments}>
         <img src="" alt="" />
 
-        <p>{input}</p>
+        {input.map((msg) => (
+          <>
+            <p>{msg}</p>
+          </>
+        ))}
       </section>
     </main>
   );
