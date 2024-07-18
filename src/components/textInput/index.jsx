@@ -1,8 +1,10 @@
 /* eslint-disable react/prop-types */
+import { useState } from "react";
+import styles from "./textInput.module.scss";
 
-import styles from './textInput.module.scss'
+export const TextInput = ({ placeHolder, maxLength }) => {
+  const [caracter, setCaracter] = useState("");
 
-export const TextInput = ({placeHolder, maxLength}) => {
   return (
     <main>
       <section className={styles.container}>
@@ -10,20 +12,25 @@ export const TextInput = ({placeHolder, maxLength}) => {
           <h1>React--X </h1>
 
           <div>
-            <textarea placeholder={placeHolder} maxLength={maxLength} />
+            <textarea
+              placeholder={placeHolder}
+              maxLength={maxLength}
+              value={caracter}
+              onChange={(e) => setCaracter(e.target.value)}
+            />
           </div>
-          <span> 0 / 125</span>
+          <span>
+            {" "}
+            {caracter.length}/ {maxLength}
+          </span>
         </form>
-
       </section>
 
-        <section className={styles.coments}>
-          <img src="" alt="" />
+      <section className={styles.coments}>
+        <img src="" alt="" />
 
-          <p>
-            comentario
-          </p>
-        </section>
+        <p>comentario</p>
+      </section>
     </main>
-  )
-}
+  );
+};
